@@ -5,9 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-//Let's check it later.
 public class Player
-    //whay before GameController class?
 {
     public Image panel;
     public TMP_Text text;
@@ -24,16 +22,11 @@ public class PlayerColor
 public class GameController : MonoBehaviour
 {
     public List<TMP_Text> buttonList;
-    // I need to review waht is "List"
-
     private string playerSide;
     public GameObject gameOverPanel;
     public TMP_Text gameOverText;
-
     private int moveCount;
     public GameObject restartButton;
-    //public GameObject aiueo; OK, in Unity, the first letter changes to capital.
-
     public Player playerX;
     public Player playerO;
     public PlayerColor activePlayerColor;
@@ -44,7 +37,6 @@ public class GameController : MonoBehaviour
     public void Start()
     {
         SetGameControllerReferenceOnButtons();
-        //playerSide = "X";
 
         gameOverPanel.SetActive(false);
 
@@ -52,19 +44,14 @@ public class GameController : MonoBehaviour
 
         restartButton.SetActive(false);
 
-        //SetPlayerColors(playerX, playerO);
-
-        ///SetPlayerButtons(false);
     }
 
     public void SetGameControllerReferenceOnButtons()
     {
-        //I should learn several ways to call loop again...
+  
         for (int i = 0; i < buttonList.Count; i++)
-            //Count? what is this?
         {
             buttonList[i].GetComponentInParent<GridSpace>().SetGameControllerReference(this);
-                //???????????????????????????????????????
         }
     }
 
@@ -79,9 +66,7 @@ public class GameController : MonoBehaviour
     {
         moveCount++;
 
-        //Debug.Log("EndTurn is not implemented!");
         if (buttonList[0].text == playerSide && buttonList[1].text == playerSide && buttonList[2].text == playerSide)
-            //check ==, &&! what do they mean?
         {
             GameOver(playerSide);
         }
@@ -117,15 +102,8 @@ public class GameController : MonoBehaviour
 
         else if (moveCount >= 9)
         {
-            /*
-            gameOverPanel.SetActive(true);
-            gameOverText.text = "It's a draw!";
-            */
-            //SetGameOverText("It's a draw!");
             GameOver("draw");
         }
-
-        //To change the player foe next tuern.
         else
         {
             ChangeSlides();
@@ -151,13 +129,7 @@ public class GameController : MonoBehaviour
 
     void GameOver(string winningPlayer)
     {
-        /*
-        for(int i= 0; i < buttonList.Count; i++)
-        {
-            buttonList[i].GetComponentInParent<Button>().interactable = false;
-            //I need to understand bool more.
-        }
-        */
+        
         SetBoardInteractable(false);
 
         if (winningPlayer == "draw")
@@ -170,34 +142,25 @@ public class GameController : MonoBehaviour
             SetGameOverText(winningPlayer + " Wins!");
         }
 
-        /*
-        gameOverPanel.SetActive(true);
-        gameOverText.text = playerSide + " Wins!";
-        */
-        //SetGameOverText(playerSide + " Wins!");
-
         restartButton.SetActive(true);
     }
 
    
 
     void SetGameOverText(string value)
-        //I haven't understanded well the meaning inside the ().
     {
         gameOverPanel.SetActive(true);
-        gameOverText.text = value; //what is this meaning?
+        gameOverText.text = value; 
     }
 
     public void RestartGame()
     {
-        //playerSide = "X";
         moveCount = 0;
         gameOverPanel.SetActive(false);
 
-        //SetBoardInteractable(true);
+
         for (int i = 0; i < buttonList.Count; i++)
         {
-            //buttonList[i].GetComponentInParent<Button>().interactable = true;
             buttonList[i].text = "";
 
             restartButton.SetActive(false);
@@ -206,7 +169,6 @@ public class GameController : MonoBehaviour
         SetPlayerButtons(true);
         SetPlayerColorsInactive();
         startInfo.SetActive(true);
-        //SetPlayerColors(playerX, playerO);
     }
 
     void SetBoardInteractable(bool toggle)
@@ -250,7 +212,6 @@ public class GameController : MonoBehaviour
     {
         playerX.button.interactable = toggle;
         playerO.button.interactable = toggle;
-        //toggle?
     }
 
     void SetPlayerColorsInactive()
